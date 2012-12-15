@@ -1,0 +1,31 @@
+<h1>Listing incomes</h1>
+
+<table>
+  <thead>
+    <tr>
+        <th>Amount</th>
+        <th>Day of month</th>
+        <th>Recurring</th>
+        <th>Every x weeks</th>
+        <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <%= content_tag_for(:tr, @incomes) do |income| %>
+        <td><%= income.amount %></td>
+        <td><%= income.day_of_month %></td>
+        <td><%= income.recurring %></td>
+        <td><%= income.every_x_weeks %></td>
+        <td><%= link_to 'Show', income %></td>
+      <td><%= link_to 'Edit', edit_income_path(income) %></td>
+      <td><%= link_to 'Destroy', income, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'New Income', new_income_path %>

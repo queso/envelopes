@@ -1,0 +1,33 @@
+<h1>Bill Schedule</h1>
+<% @pay_dates.in_groups_of(3, false) do |row_group| %>
+  <div class="row">
+  <% row_group.each_with_index do |pay_date, index| %>
+    <div class="span6">
+      <table class="table table-bordered">
+        <thead>
+          <th colspan="3"><%= pay_date.to_date.to_s(:short_month) %></th>
+          <th><%= number_to_currency @income.amount %></th>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan="3"><h5>Total:</h4></td>
+            <td><h5><%= number_to_currency @totals[pay_date] %></h5></td>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% @bills[pay_date].each do |bill| %>
+            <% payment = Payment.find_by_expense_id_and_pay_date(bill.id, pay_date.to_date) %>
+            <tr class="<%= payment.nil? ? "warning" : "success" %>">
+              <td><%= bill.day_of_month %></td>
+              <td><%= bill.name %></td>
+              <td><%= number_to_currency bill.amount %></td>
+              <td><%= button_to "Add payment", payments_url(:payment => {:expense_id => bill.id, :pay_date => pay_date}), {:class => "btn btn-info"} unless payment %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  <% end %>
+</div>
+<% end %>

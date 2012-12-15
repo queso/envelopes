@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @income.amount %>
+</p>
+
+<p>
+  <strong>Day of month:</strong>
+  <%= @income.day_of_month %>
+</p>
+
+<p>
+  <strong>Recurring:</strong>
+  <%= @income.recurring %>
+</p>
+
+<p>
+  <strong>Every x weeks:</strong>
+  <%= @income.every_x_weeks %>
+</p>
+
+
+<%= link_to 'Edit', edit_income_path(@income) %> |
+<%= link_to 'Back', incomes_path %>
